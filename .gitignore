@@ -9,3 +9,4 @@ data/
 tests/.tmp-*
 imprint-export/
 .DS_Store
+.claude/
