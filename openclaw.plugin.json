@@ -1,0 +1,86 @@
+{
+  "id": "imprint",
+  "kind": "memory",
+  "uiHints": {
+    "dataDir": {
+      "label": "Data Directory",
+      "placeholder": ".imprint",
+      "help": "Directory for SQLite database (relative to workspace)",
+      "advanced": true
+    },
+    "embeddingModel": {
+      "label": "Embedding Model",
+      "placeholder": "Xenova/all-MiniLM-L6-v2",
+      "help": "HuggingFace model for local embeddings (no API key needed)",
+      "advanced": true
+    },
+    "autoCapture": {
+      "label": "Auto-Capture",
+      "help": "Automatically capture important facts from conversations"
+    },
+    "autoRecall": {
+      "label": "Auto-Recall",
+      "help": "Automatically inject relevant memories into agent context"
+    },
+    "redis.enabled": {
+      "label": "Enable Redis",
+      "help": "Use Redis for hot-cache and multi-agent pub/sub notifications",
+      "advanced": true
+    },
+    "redis.url": {
+      "label": "Redis URL",
+      "placeholder": "redis://localhost:6379",
+      "advanced": true
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "dataDir": {
+        "type": "string",
+        "default": ".imprint"
+      },
+      "embeddingModel": {
+        "type": "string",
+        "default": "Xenova/all-MiniLM-L6-v2"
+      },
+      "redis": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean", "default": false },
+          "url": { "type": "string", "default": "redis://localhost:6379" }
+        }
+      },
+      "scoring": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "similarity": { "type": "number", "default": 0.5, "minimum": 0, "maximum": 1 },
+          "recency": { "type": "number", "default": 0.3, "minimum": 0, "maximum": 1 },
+          "importance": { "type": "number", "default": 0.2, "minimum": 0, "maximum": 1 },
+          "halfLifeDays": { "type": "number", "default": 30, "minimum": 1 }
+        }
+      },
+      "consolidation": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "intervalMinutes": { "type": "number", "default": 30, "minimum": 5 },
+          "mergeThreshold": { "type": "number", "default": 0.92, "minimum": 0.5, "maximum": 1 },
+          "archiveAfterDays": { "type": "number", "default": 90, "minimum": 1 }
+        }
+      },
+      "cache": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "maxEntries": { "type": "number", "default": 1000, "minimum": 100 }
+        }
+      },
+      "autoCapture": { "type": "boolean", "default": false },
+      "autoRecall": { "type": "boolean", "default": true }
+    }
+  }
+}

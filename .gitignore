@@ -1,0 +1,10 @@
+node_modules/
+dist/
+data/
+.imprint/
+*.db
+*.db-wal
+*.db-shm
+tests/.tmp-*
+imprint-export/
+.DS_Store
